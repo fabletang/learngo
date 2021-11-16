@@ -1,4 +1,4 @@
-package gchannel
+package channel
 
 import "fmt"
 

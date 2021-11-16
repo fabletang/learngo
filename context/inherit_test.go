@@ -1,4 +1,4 @@
-package gcontext
+package context
 
 import "testing"
 

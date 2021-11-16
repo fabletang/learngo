@@ -1,4 +1,4 @@
-package gcontext
+package context
 
 import (
 	"bytes"
@@ -29,22 +29,14 @@ func init() {
 func Inherit() {
 	ctx := context.Background()
 	var cancel context.CancelFunc
-	//ctx, cancel = context.WithCancel(ctx)
-	//print(ctx, "root", traceid)
-	//watch(ctx)
 	ctx = context.WithValue(ctx, traceid, traceID)
-	//print(ctx, "WithValue", traceid)
-	//watch(ctx)
-	//print(ctx, "WithCancel", traceid)
 	watch(ctx)
+
 	ctx, cancel = context.WithCancel(ctx)
 	watch(ctx)
+
 	ctx = context.WithValue(ctx, traceid, "xyz456")
-	//print(ctx, "WithValue", traceid)
 	watch(ctx)
-	//time.Sleep(2 * time.Second)
-	//cancel()
-	//time.Sleep(1 * time.Second)
 
 	var stop context.CancelFunc
 	ctx, stop = signal.NotifyContext(ctx, syscall.SIGINT, syscall.SIGTERM)
@@ -65,10 +57,6 @@ func Inherit() {
 
 }
 func print(ctx context.Context, remark string, key keyType) {
-	//var rs string
-	//if ctx.Value(key) != nil {
-	//rs = ctx.Value(key).(string)
-	//}
 	rs, ok := ctx.Value(key).(string)
 	if ok {
 		fmt.Printf("remark:%s,key:%s,value:%s,at:%s\n", remark, key, rs, time.Now().Format("2006-01-02 15:04:05.000"))
