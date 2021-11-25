@@ -8,7 +8,7 @@ import (
 //Car car struct
 type Car struct {
 	name   string //name
-	id     int    //num
+	id     int32  //num
 	remark string //reduce
 }
 

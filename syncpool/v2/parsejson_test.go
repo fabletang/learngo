@@ -5,7 +5,13 @@ import (
 )
 
 var data = string(make([]byte, 500))
+
 var bts, _ = json.Marshal(Car{name: "bmw", id: 1234, remark: data})
+
+//func int() {
+//data = string(make([]byte, 500))
+//bts, _ = json.Marshal(Car{name: "bmw", id: 1234, remark: data})
+//}
 
 func BenchmarkUnmarshal(b *testing.B) {
 	for n := 0; n < b.N; n++ {
@@ -28,8 +34,8 @@ func BenchmarkUnmarshalWithPool(b *testing.B) {
 //goarch: amd64
 //pkg: github.com/fabletang/learngo/syncpool/v2
 //cpu: Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz
-//BenchmarkUnmarshal-8             1505709               785.5 ns/op           244 B/op          9 allocs/op
-//BenchmarkUnmarshalGobel-8       11212528               106.6 ns/op             0 B/op          0 allocs/op
-//BenchmarkUnmarshalWithPool-8     3686541               322.8 ns/op            48 B/op          1 allocs/op
+//BenchmarkUnmarshal-8             1331906               901.8 ns/op           244 B/op          9 allocs/op
+//BenchmarkUnmarshalGobel-8       10392008               123.3 ns/op             0 B/op          0 allocs/op
+//BenchmarkUnmarshalWithPool-8     8561763               142.7 ns/op             0 B/op          0 allocs/op
 //PASS
-//ok      github.com/fabletang/learngo/syncpool/v2        4.826s
+//ok      github.com/fabletang/learngo/syncpool/v2        4.888s

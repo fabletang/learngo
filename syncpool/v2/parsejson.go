@@ -8,10 +8,10 @@ import (
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
-//Car car struct
+// Car : car struct
 type Car struct {
 	name   string //name
-	id     int    //num
+	id     int32  //num
 	remark string //reduce
 }
 
@@ -40,6 +40,6 @@ var CarPool = sync.Pool{
 func UnmarshalWithPool(bts []byte) (Car, error) {
 	car := CarPool.Get().(*Car)
 	err := json.Unmarshal(bts, car)
-	//CarPool.Put(car)
+	CarPool.Put(car)
 	return *car, err
 }
