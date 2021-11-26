@@ -4,14 +4,16 @@ import (
 	"testing"
 )
 
-var data = string(make([]byte, 500))
+//var data string
+//var bts []byte
 
-var bts, _ = json.Marshal(Car{name: "bmw", id: 1234, remark: data})
-
-//func int() {
+//func setup() {
 //data = string(make([]byte, 500))
 //bts, _ = json.Marshal(Car{name: "bmw", id: 1234, remark: data})
 //}
+
+var data = string(make([]byte, 500))
+var bts, _ = json.Marshal(Car{name: "bmw", id: 1234, remark: data})
 
 func BenchmarkUnmarshal(b *testing.B) {
 	for n := 0; n < b.N; n++ {

@@ -1,7 +1,6 @@
 package channel
 
 import (
-	"fmt"
 	"testing"
 	"time"
 )
@@ -26,18 +25,19 @@ func TestBlock(t *testing.T) {
 	for {
 		select {
 		case <-after:
-			fmt.Printf("超时退出,at %s\n", time.Now().Format("2006-01-02 15:04:05.000"))
+			//fmt.Printf("超时退出,at %s\n", time.Now().Format("2006-01-02 15:04:05.000"))
+			t.Logf("超时退出,at %s\n", time.Now().Format("2006-01-02 15:04:05.000"))
 			close(ch) //channel不需要通过close释放资源，只要没有goroutine持有channel，相关资源会自动释放
 			return
 		case <-time.Tick((1*1000 - 10) * time.Millisecond):
-			fmt.Printf("....tick wrong,at %s\n", time.Now().Format("2006-01-02 15:04:05.000"))
+			t.Logf("....tick wrong,at %s\n", time.Now().Format("2006-01-02 15:04:05.000"))
 		case <-tick:
-			fmt.Printf("....tick right,at %s\n", time.Now().Format("2006-01-02 15:04:05.000"))
+			t.Logf("....tick right,at %s\n", time.Now().Format("2006-01-02 15:04:05.000"))
 
 		case rs := <-ch:
 
 			go func() {
-				fmt.Printf("run block()...%d,at %s\n", rs, time.Now().Format("2006-01-02 15:04:05.000"))
+				t.Logf("run block()...%d,at %s\n", rs, time.Now().Format("2006-01-02 15:04:05.000"))
 				block()
 			}()
 		}
